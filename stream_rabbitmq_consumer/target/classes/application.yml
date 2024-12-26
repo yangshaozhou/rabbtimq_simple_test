@@ -1,0 +1,26 @@
+#spring.application.name=stream_rabbitmq_consumer
+spring:
+  application:
+    name: rabbitmq_consumer
+#    rabbitmq链接配置
+  rabbitmq:
+    host: 47.106.224.218
+    port: 5672
+    username: admin
+    password: admin
+#    virtual-host: /my_vhost # 单独消息传送东西
+  cloud:
+    function:
+      definition: consume # 相当于消费者的消费函数
+    stream:
+      bindings:
+        consume-in-0: # 通道名称
+          consumer:
+            max-attempts: 3 #最大尝试次数
+          destination: test-exchange-cloud
+          content-type: application/json
+          group: test-group
+          binder: rabbit
+
+
+

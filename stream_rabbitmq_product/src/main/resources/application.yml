@@ -1,0 +1,21 @@
+#spring.application.name=stream_rabbitmq_product
+spring:
+  application:
+    name: rabbitmq_product
+  #    rabbitmq链接配置
+  rabbitmq:
+    host: 47.106.224.218
+    port: 5672
+    username: admin
+    password: admin
+#    virtual-host: /my_vhost # 虚拟机
+  cloud:
+    stream:
+      bindings:
+        product-out-0:
+          content-type: application/json
+          destination: test-exchange-cloud # 同消费者保持一致
+          binder: rabbit
+          group: test-group
+server:
+  port: 8090
